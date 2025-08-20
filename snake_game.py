@@ -13,8 +13,8 @@ red = (255,0,0)
 
 game_over=False
 
-x1 = 300
-y1 = 300
+x1 = 200
+y1 = 150
 
 x1_change = 0
 y1_change = 0
@@ -22,32 +22,34 @@ y1_change = 0
 clock = pygame.time.Clock()
 
 while not game_over:
-    
-        for event in pygame.event.get():            
-            if event.type==pygame.QUIT:
-
-                game_over=True
-                if event.type == pygame.KEYDOWN:
-                    x1_change = -10
-                    y1_change = 0
-                elif event.key == pygamr.K_RIGHT:
-                    x1_change = 10
-                    y1_change = 0
-                elif event.key == pygame.K_UP:
-                    y1_change = -10
-                    x1_change = 0
-                elif event.key == pygame.K_DOWN:
-                    y1_change = 10
-                    x1_change = 0        
+    for event in pygame.event.get():            
+        if event.type == pygame.QUIT:
+            game_over = True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                x1_change = -10
+                y1_change = 0
+            elif event.key == pygame.K_RIGHT:
+                x1_change = 10
+                y1_change = 0
+            elif event.key == pygame.K_UP:
+                y1_change = -10
+                x1_change = 0
+            elif event.key == pygame.K_DOWN:
+                y1_change = 10
+                x1_change = 0        
 
     x1 += x1_change
     y1 += y1_change
+    
+    # Boundary checking
+    if x1 >= 400 or x1 < 0 or y1 >= 300 or y1 < 0:
+        game_over = True
+    
     dis.fill(white)
-    pygame.draw.rect(dis, black, [x1,y1,10,10])
-            
-pygame.display.update()
-
-clock.tick(30)            
+    pygame.draw.rect(dis, black, [x1, y1, 10, 10])
+    pygame.display.update()
+    clock.tick(30)            
 
 pygame.quit()
 quit()
